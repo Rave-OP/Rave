@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Opening YouTube...</title>
+
+<style>
+body{
+    background:#0a0a0a;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    font-family:Arial,sans-serif;
+    text-align:center;
+}
+</style>
+</head>
+<body>
+
+<div>
+    <h1>OPENING RAVE</h1>
+    <p>Launching YouTube...</p>
+</div>
+
+<script>
+const ytUrl = "https://www.youtube.com/@RaveVerseOP";
+const ua = navigator.userAgent;
+
+if (/Android/i.test(ua)) {
+
+    window.location.href =
+    "intent://www.youtube.com/@RaveVerseOP#Intent;package=com.google.android.youtube;scheme=https;S.browser_fallback_url=" +
+    encodeURIComponent(ytUrl) + ";end";
+
+}
+else if (/iPhone|iPad|iPod/i.test(ua)) {
+
+    window.location.href =
+    "youtube://www.youtube.com/@RaveVerseOP";
+
+    setTimeout(() => {
+        window.location.href = ytUrl;
+    }, 2000);
+
+}
+else {
+
+    window.location.href = ytUrl;
+
+}
+</script>
+
+</body>
+</html>
