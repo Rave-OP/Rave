@@ -655,65 +655,45 @@
 <script>
 function openYouTube(webUrl) {
 
-    // ANDROID
     if (/Android/i.test(navigator.userAgent)) {
 
-        const intentUrl =
+        window.location.href =
             "intent://" +
             webUrl.replace("https://", "") +
-            "#Intent;" +
-            "scheme=https;" +
-            "package=com.google.android.youtube;" +
-            "S.browser_fallback_url=" +
+            "#Intent;package=com.google.android.youtube;scheme=https;S.browser_fallback_url=" +
             encodeURIComponent(webUrl) +
             ";end";
 
-        window.location.href = intentUrl;
-        return;
-    }
+    } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
 
-    // iPHONE / iPAD
-    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-
-        const youtubeUrl =
-            "youtube://www.youtube.com/" +
-            webUrl.split("youtube.com/")[1];
-
-        window.location.href = youtubeUrl;
+        window.location.href =
+            "youtube://" +
+            webUrl.replace("https://www.youtube.com/", "www.youtube.com/");
 
         setTimeout(() => {
             window.location.href = webUrl;
         }, 1500);
 
-        return;
-    }
+    } else {
 
-    // DESKTOP
-    window.open(webUrl, "_blank");
+        window.location.href = webUrl;
+
+    }
 }
-</script>
-<script>
+
+
 function openTwitch(webUrl) {
 
-    // ANDROID
     if (/Android/i.test(navigator.userAgent)) {
 
-        const intentUrl =
+        window.location.href =
             "intent://" +
             webUrl.replace("https://", "") +
-            "#Intent;" +
-            "scheme=https;" +
-            "package=tv.twitch.android.app;" +
-            "S.browser_fallback_url=" +
+            "#Intent;package=tv.twitch.android.app;scheme=https;S.browser_fallback_url=" +
             encodeURIComponent(webUrl) +
             ";end";
 
-        window.location.href = intentUrl;
-        return;
-    }
-
-    // iPHONE / iPAD
-    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+    } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
 
         window.location.href =
             "twitch://stream/ravexd_";
@@ -722,11 +702,11 @@ function openTwitch(webUrl) {
             window.location.href = webUrl;
         }, 1500);
 
-        return;
-    }
+    } else {
 
-    // DESKTOP
-    window.open(webUrl, "_blank");
+        window.location.href = webUrl;
+
+    }
 }
 </script>
 <body>
