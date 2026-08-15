@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Opening Suhas Raut...</title>
+
+</head>
+
+<body>
+
+<script>
+
+const youtubeUrl = "https://www.youtube.com/@suhasraut24";
+const ua = navigator.userAgent;
+
+if (/Android/i.test(ua)) {
+
+    window.location.href =
+    "intent://www.youtube.com/@suhasraut24#Intent;package=com.google.android.youtube;scheme=https;S.browser_fallback_url=" +
+    encodeURIComponent(youtubeUrl) +
+    ";end";
+
+}
+else if (/iPhone|iPad|iPod/i.test(ua)) {
+
+    window.location.href =
+    "youtube://www.youtube.com/@suhasraut24";
+
+    setTimeout(() => {
+        window.location.href = youtubeUrl;
+    }, 1500);
+
+}
+else {
+
+    window.location.href = youtubeUrl;
+
+}
+
+</script>
+
+</body>
+</html>
