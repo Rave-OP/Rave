@@ -652,7 +652,83 @@
         }
     </style>
 </head>
+<script>
+function openYouTube(webUrl) {
 
+    // ANDROID
+    if (/Android/i.test(navigator.userAgent)) {
+
+        const intentUrl =
+            "intent://" +
+            webUrl.replace("https://", "") +
+            "#Intent;" +
+            "scheme=https;" +
+            "package=com.google.android.youtube;" +
+            "S.browser_fallback_url=" +
+            encodeURIComponent(webUrl) +
+            ";end";
+
+        window.location.href = intentUrl;
+        return;
+    }
+
+    // iPHONE / iPAD
+    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+
+        const youtubeUrl =
+            "youtube://www.youtube.com/" +
+            webUrl.split("youtube.com/")[1];
+
+        window.location.href = youtubeUrl;
+
+        setTimeout(() => {
+            window.location.href = webUrl;
+        }, 1500);
+
+        return;
+    }
+
+    // DESKTOP
+    window.open(webUrl, "_blank");
+}
+</script>
+<script>
+function openTwitch(webUrl) {
+
+    // ANDROID
+    if (/Android/i.test(navigator.userAgent)) {
+
+        const intentUrl =
+            "intent://" +
+            webUrl.replace("https://", "") +
+            "#Intent;" +
+            "scheme=https;" +
+            "package=tv.twitch.android.app;" +
+            "S.browser_fallback_url=" +
+            encodeURIComponent(webUrl) +
+            ";end";
+
+        window.location.href = intentUrl;
+        return;
+    }
+
+    // iPHONE / iPAD
+    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+
+        window.location.href =
+            "twitch://stream/ravexd_";
+
+        setTimeout(() => {
+            window.location.href = webUrl;
+        }, 1500);
+
+        return;
+    }
+
+    // DESKTOP
+    window.open(webUrl, "_blank");
+}
+</script>
 <body>
 
 <div class="background-noise"></div>
@@ -702,11 +778,10 @@
         <!-- YOUTUBE -->
 
         <a
-            class="link-card youtube"
-            href="https://www.youtube.com/@RaveOP8"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
+    class="link-card youtube"
+    href="#"
+    onclick="openYouTube('https://www.youtube.com/@RaveOP8'); return false;"
+>
 
             <div class="icon">
                 <svg viewBox="0 0 24 24" fill="currentColor">
@@ -726,12 +801,11 @@
 
         <!-- TWITCH -->
 
-        <a
-            class="link-card twitch"
-            href="https://www.twitch.tv/ravexd_"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
+            <a
+    class="link-card twitch"
+    href="#"
+    onclick="openTwitch('https://www.twitch.tv/ravexd_'); return false;"
+>
 
             <div class="icon">
                 <svg viewBox="0 0 24 24" fill="currentColor">
@@ -764,11 +838,10 @@
         <!-- CS / VALORANT -->
 
         <a
-            class="link-card cs"
-            href="https://www.youtube.com/@RaveCS8"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
+    class="link-card cs"
+    href="#"
+    onclick="openYouTube('https://www.youtube.com/@RaveCS8'); return false;"
+>
 
             <div class="icon">
                 <svg viewBox="0 0 24 24" fill="currentColor">
@@ -788,12 +861,11 @@
 
         <!-- MINECRAFT -->
 
-        <a
-            class="link-card minecraft"
-            href="https://www.youtube.com/@RavePlaysXD"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
+        <<a
+    class="link-card minecraft"
+    href="#"
+    onclick="openYouTube('https://www.youtube.com/@RavePlaysXD'); return false;"
+>
 
             <div class="icon">
                 <svg viewBox="0 0 24 24" fill="currentColor">
@@ -814,11 +886,10 @@
         <!-- RAVEVERSE -->
 
         <a
-            class="link-card verse"
-            href="https://www.youtube.com/@RaveVerseOP"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
+    class="link-card verse"
+    href="#"
+    onclick="openYouTube('https://www.youtube.com/@RaveVerseOP'); return false;"
+>
 
             <div class="icon">
                 <svg viewBox="0 0 24 24" fill="currentColor">
@@ -839,9 +910,8 @@
 
 <a
     class="link-card youtube"
-    href="https://www.youtube.com/@suhasraut24"
-    target="_blank"
-    rel="noopener noreferrer"
+    href="#"
+    onclick="openYouTube('https://www.youtube.com/@suhasraut24'); return false;"
 >
 
     <div class="icon">
