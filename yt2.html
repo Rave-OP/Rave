@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<title>RAVE — RaveCS8</title>
 
-<title>RaveCS8 — YouTube</title>
+<link rel="icon" href="./img/banner.jpg">
 
 <style>
 
@@ -20,71 +19,193 @@
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    margin: 0;
     min-height: 100vh;
-
     display: flex;
     align-items: center;
     justify-content: center;
+    background: #050505;
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,.62),
+            rgba(0,0,0,.86)
+        ),
+        url("./img/banner.jpg")
+        center / cover no-repeat;
+
+    filter: blur(4px);
+    transform: scale(1.05);
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
 
     background:
         radial-gradient(
-            circle at 50% 20%,
-            rgba(57,255,20,.12),
+            circle at 50% 45%,
+            rgba(57,255,20,.18),
             transparent 35%
-        ),
-        #050505;
-
-    color: white;
-    font-family: Arial, sans-serif;
+        );
 }
 
-.box {
-    width: min(90%, 420px);
-    padding: 35px 25px;
+.loader {
+    width: min(90%, 430px);
 
     text-align: center;
 
-    border: 1px solid rgba(255,255,255,.12);
+    padding: 42px 30px;
+
     border-radius: 24px;
 
-    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.12);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.075),
+            rgba(255,255,255,.025)
+        );
 
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.5),
+        inset 0 1px 0 rgba(255,255,255,.08);
 }
 
-h1 {
-    margin: 0;
-
-    font-family: "ObelixPro";
-    font-size: 35px;
+.logo {
+    font-family: "ObelixPro", sans-serif;
+    font-size: 42px;
+    letter-spacing: 2px;
+    margin-bottom: 28px;
 }
 
-h1 span {
+.logo span {
     color: #39ff14;
 }
 
-p {
-    margin: 12px 0 25px;
-    color: rgba(255,255,255,.5);
+.channel-icon {
+    width: 72px;
+    height: 72px;
+
+    margin: 0 auto 22px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 20px;
+
+    color: #39ff14;
+
+    background: rgba(57,255,20,.10);
+
+    border: 1px solid rgba(57,255,20,.25);
+
+    box-shadow:
+        0 0 30px rgba(57,255,20,.18),
+        inset 0 1px 0 rgba(255,255,255,.08);
+
+    animation: pulse 1.8s ease-in-out infinite;
 }
 
-a {
-    display: inline-block;
+.channel-icon svg {
+    width: 34px;
+    height: 34px;
+}
 
-    padding: 13px 22px;
+.title {
+    font-family: "ObelixPro", sans-serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
 
-    border-radius: 12px;
+.subtitle {
+    color: rgba(255,255,255,.48);
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-bottom: 28px;
+}
 
-    color: #050505;
-    text-decoration: none;
+.loading {
+    width: 100%;
+    height: 4px;
+
+    border-radius: 999px;
+
+    overflow: hidden;
+
+    background: rgba(255,255,255,.08);
+}
+
+.loading-bar {
+    width: 35%;
+    height: 100%;
+
+    border-radius: inherit;
 
     background: #39ff14;
 
-    font-weight: bold;
+    box-shadow:
+        0 0 12px rgba(57,255,20,.7);
+
+    animation: loading 1.4s ease-in-out infinite;
+}
+
+.footer {
+    margin-top: 18px;
+
+    color: rgba(255,255,255,.28);
+
+    font-size: 9px;
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+@keyframes loading {
+
+    0% {
+        transform: translateX(-120%);
+    }
+
+    50% {
+        transform: translateX(130%);
+    }
+
+    100% {
+        transform: translateX(300%);
+    }
+}
+
+@keyframes pulse {
+
+    0%,100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.06);
+    }
 }
 
 </style>
@@ -93,25 +214,93 @@ a {
 
 <body>
 
-<div class="box">
+<div class="loader">
 
-    <h1>
-        OPENING <span>RAVECS</span>
-    </h1>
+    <div class="logo">
+        <span>RAVE</span>
+    </div>
 
-    <p>
-        CS2 • Valorant • Competitive Gaming
-    </p>
+    <div class="channel-icon">
 
-    <a
-        href="https://www.youtube.com/@RaveCS8"
-        target="_blank"
-        rel="noopener noreferrer"
-    >
-        Open YouTube
-    </a>
+        <svg viewBox="0 0 24 24" fill="currentColor">
+
+            <path d="
+                M23.5 6.2
+                a3 3 0 0 0-2.1-2.1
+                C19.5 3.5 12 3.5 12 3.5
+                s-7.5 0-9.4.6
+                A3 3 0 0 0 .5 6.2
+                A31 31 0 0 0 0 12
+                a31 31 0 0 0 .5 5.8
+                3 3 0 0 0 2.1 2.1
+                c1.9.6 9.4.6 9.4.6
+                s7.5 0 9.4-.6
+                a3 3 0 0 0 2.1-2.1
+                A31 31 0 0 0 24 12
+                a31 31 0 0 0-.5-5.8ZM9.6 15.9
+                V8.1
+                l6.5 3.9
+                -6.5 3.9Z
+            "/>
+
+        </svg>
+
+    </div>
+
+    <div class="title">
+        RAVECS8
+    </div>
+
+    <div class="subtitle">
+        Opening CS2 & Valorant...
+    </div>
+
+    <div class="loading">
+        <div class="loading-bar"></div>
+    </div>
+
+    <div class="footer">
+        RAVE • GAMING • COMPETITIVE
+    </div>
 
 </div>
+
+<script>
+
+const ytUrl = "https://www.youtube.com/@RaveCS8";
+const ua = navigator.userAgent;
+
+if (/Android/i.test(ua)) {
+
+    window.location.href =
+        "intent://www.youtube.com/@RaveCS8" +
+        "#Intent;" +
+        "package=com.google.android.youtube;" +
+        "scheme=https;" +
+        "S.browser_fallback_url=" +
+        encodeURIComponent(ytUrl) +
+        ";end";
+
+}
+
+else if (/iPhone|iPad|iPod/i.test(ua)) {
+
+    window.location.href =
+        "youtube://www.youtube.com/@RaveCS8";
+
+    setTimeout(() => {
+        window.location.href = ytUrl;
+    }, 2000);
+
+}
+
+else {
+
+    window.location.href = ytUrl;
+
+}
+
+</script>
 
 </body>
 </html>
