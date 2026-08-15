@@ -1,57 +1,117 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Opening YouTube...</title>
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Rave Plays — YouTube</title>
 
 <style>
-body{
-    background:#0a0a0a;
-    color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-    font-family:Arial,sans-serif;
-    text-align:center;
+
+@font-face {
+    font-family: "ObelixPro";
+    src: url("./fonts/ObelixPro.ttf") format("truetype");
 }
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(80,220,100,.12),
+            transparent 35%
+        ),
+        #050505;
+
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.box {
+    width: min(90%, 420px);
+    padding: 35px 25px;
+
+    text-align: center;
+
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 24px;
+
+    background: rgba(255,255,255,.04);
+
+    backdrop-filter: blur(20px);
+}
+
+h1 {
+    margin: 0;
+
+    font-family: "ObelixPro";
+    font-size: 35px;
+}
+
+h1 span {
+    color: #64d96b;
+}
+
+p {
+    margin: 12px 0 25px;
+    color: rgba(255,255,255,.5);
+}
+
+a {
+    display: inline-block;
+
+    padding: 13px 22px;
+
+    border-radius: 12px;
+
+    color: #050505;
+    text-decoration: none;
+
+    background: #64d96b;
+
+    font-weight: bold;
+}
+
 </style>
+
 </head>
+
 <body>
 
-<div>
-    <h1>OPENING RAVE</h1>
-    <p>Launching YouTube...</p>
+<div class="box">
+
+    <h1>
+        OPENING <span>RAVE PLAYS</span>
+    </h1>
+
+    <p>
+        Minecraft • Gaming • Content
+    </p>
+
+    <a
+        href="https://www.youtube.com/@RavePlaysXD"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        Open YouTube
+    </a>
+
 </div>
-
-<script>
-const ytUrl = "https://www.youtube.com/@RavePlaysXD";
-const ua = navigator.userAgent;
-
-if (/Android/i.test(ua)) {
-
-    window.location.href =
-    "intent://www.youtube.com/@RavePlaysXD#Intent;package=com.google.android.youtube;scheme=https;S.browser_fallback_url=" +
-    encodeURIComponent(ytUrl) + ";end";
-
-}
-else if (/iPhone|iPad|iPod/i.test(ua)) {
-
-    window.location.href =
-    "youtube://www.youtube.com/@RavePlaysXD";
-
-    setTimeout(() => {
-        window.location.href = ytUrl;
-    }, 2000);
-
-}
-else {
-
-    window.location.href = ytUrl;
-
-}
-</script>
 
 </body>
 </html>

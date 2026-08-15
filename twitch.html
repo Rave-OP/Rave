@@ -1,38 +1,150 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Opening Twitch...</title>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>RAVE — Twitch</title>
+
+    <style>
+
+        @font-face {
+            font-family: "ObelixPro";
+            src: url("./fonts/ObelixPro.ttf") format("truetype");
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                radial-gradient(
+                    circle at 50% 20%,
+                    rgba(170,70,255,.15),
+                    transparent 35%
+                ),
+                #050505;
+
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .box {
+            width: min(90%, 420px);
+            padding: 35px 25px;
+
+            text-align: center;
+
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: 24px;
+
+            background: rgba(255,255,255,.04);
+
+            backdrop-filter: blur(20px);
+        }
+
+        h1 {
+            margin: 0;
+
+            font-family: "ObelixPro";
+            font-size: 35px;
+        }
+
+        h1 span {
+            color: #b85cff;
+        }
+
+        p {
+            margin: 12px 0 25px;
+            color: rgba(255,255,255,.5);
+        }
+
+        a {
+            display: inline-block;
+
+            padding: 13px 22px;
+
+            border-radius: 12px;
+
+            color: white;
+            text-decoration: none;
+
+            background: #9147ff;
+
+            font-weight: bold;
+        }
+
+    </style>
+
 </head>
+
 <body>
 
-<script>
-const twitchUrl = "https://www.twitch.tv/ravexd_";
-const ua = navigator.userAgent;
+<div class="box">
 
-if (/Android/i.test(ua)) {
+    <h1>
+        OPENING <span>TWITCH</span>
+    </h1>
+
+    <p>
+        Taking you to RaveXD...
+    </p>
+
+    <a href="https://www.twitch.tv/ravexd_">
+        Open Twitch
+    </a>
+
+</div>
+
+<script>
+
+const twitchURL =
+    "https://www.twitch.tv/ravexd_";
+
+const userAgent =
+    navigator.userAgent;
+
+if (/Android/i.test(userAgent)) {
 
     window.location.href =
-    "intent://www.twitch.tv/ravexd_#Intent;package=tv.twitch.android.app;scheme=https;S.browser_fallback_url=" +
-    encodeURIComponent(twitchUrl) + ";end";
+        "intent://www.twitch.tv/ravexd_" +
+        "#Intent;" +
+        "package=tv.twitch.android.app;" +
+        "scheme=https;" +
+        "S.browser_fallback_url=" +
+        encodeURIComponent(twitchURL) +
+        ";end";
 
 }
-else if (/iPhone|iPad|iPod/i.test(ua)) {
+else if (/iPhone|iPad|iPod/i.test(userAgent)) {
 
     window.location.href =
-    "twitch://stream/ravexd_";
+        "twitch://stream/ravexd_";
 
     setTimeout(() => {
-        window.location.href = twitchUrl;
-    }, 2000);
+        window.location.href = twitchURL;
+    }, 1500);
 
 }
 else {
 
-    window.location.href = twitchUrl;
+    window.location.href = twitchURL;
 
 }
+
 </script>
 
 </body>

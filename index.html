@@ -1,233 +1,1000 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>RAVE</title>
+    <title>RAVE — Gamer & Streamer</title>
 
-<style>
-    @font-face {
-    font-family: "ObelixPro";
-    src: url("./fonts/ObelixPro.ttf") format("truetype");
-    font-weight: normal;
-    font-style: normal;
-}
-body{
-    margin:0;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-family:Arial,sans-serif;
-    overflow:hidden;
+    <meta
+        name="description"
+        content="RAVE — Gamer, streamer and content creator."
+    >
 
-    background:url('./img/banner.jpg') center center/cover no-repeat;
-}
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
+    <link rel="icon" href="./img/banner.jpg">
 
-    background:rgba(0,0,0,.15);
+    <style>
+        @font-face {
+            font-family: "ObelixPro";
+            src: url("./fonts/ObelixPro.ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+        }
 
-    backdrop-filter:blur(8px);
-    -webkit-backdrop-filter:blur(4px);
+        :root {
+            --green: #39ff14;
+            --green-soft: rgba(57, 255, 20, .18);
+            --purple: #b400ff;
+            --red: #ff2638;
+            --white: #fff;
+            --muted: rgba(255,255,255,.58);
+            --glass: rgba(10,10,14,.58);
+            --border: rgba(255,255,255,.12);
+        }
 
-    z-index:0;
-}
-.container{
-    position:relative;
-    z-index:10;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-     width:min(92%,500px);
-    margin:20px;
-    padding:30px 24px;
+        html {
+            scroll-behavior: smooth;
+        }
 
-    text-align:center;
+        body {
+            min-height: 100vh;
+            color: white;
+            font-family: Arial, sans-serif;
+            background: #050505;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-    background:rgba(15, 0, 0, 0.059);
-    backdrop-filter:blur(25px);
-    -webkit-backdrop-filter:blur(25px);
+        /* =========================
+           BACKGROUND
+        ========================= */
 
-    border:1px solid rgba(255,255,255,0.1);
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -3;
 
-    border-radius:30px;
+            background:
+                linear-gradient(
+                    rgba(0,0,0,.55),
+                    rgba(0,0,0,.78)
+                ),
+                url("./img/banner.jpg")
+                center / cover no-repeat;
 
-    padding:40px;
+            filter: blur(2px);
+            transform: scale(1.04);
+        }
 
-    box-shadow:
-    0 8px 32px rgba(0,0,0,0.4),
-    inset 0 1px 0 rgba(255,255,255,0.1);
-}
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            pointer-events: none;
 
-h1{
-    font-family:"ObelixPro", sans-serif;
-    font-size:clamp(48px, 12vw, 72px);
-    line-height:1;
-    color:#1aff01;
-    margin:0;
-    font-family: "ObelixPro", sans-serif;
-    font-size: 72px;
-    margin: 0;
-}
+            background:
+                radial-gradient(
+                    circle at 15% 15%,
+                    rgba(57,255,20,.14),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 85% 20%,
+                    rgba(180,0,255,.13),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 50% 100%,
+                    rgba(255,0,40,.12),
+                    transparent 35%
+                );
+        }
 
-p{
-    color:#ffffff;
-    font-family: "ObelixPro", sans-serif;
-    margin-bottom:30px;
-}
+        .background-noise {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
 
-.btn{
-    display:block;
-    text-decoration:none;
-    font-family: "ObelixPro", sans-serif;
+            opacity: .035;
 
-    margin:14px 0;
-    padding:16px;
+            background-image:
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+        }
 
-    color:#f0f0f0;
-    font-weight:600;
-    letter-spacing:1px;
-    background-image: radial-gradient(circle at top center, rgb(255, 106, 0),rgb(255, 0, 0));
-    /* background:rgb(255, 255, 255); */
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
+        /* =========================
+           PAGE
+        ========================= */
 
-    /* border:3px solid rgba(34, 203, 0, 0.747); */
-    border-radius:16px;
- box-shadow:
-        0 0 10px rgba(255, 0, 0, 0.12),
-        inset 0 0 10px rgba(255, 0, 0, 0.04);
-    transition:.25s ease;
+        .page {
+            width: min(100%, 760px);
+            min-height: 100vh;
+            margin: auto;
 
-    box-shadow:
-        0 0 10px rgba(0,255,120,0.12),
-        inset 0 0 10px rgba(0,255,120,0.04);
-}
+            padding: 42px 24px 28px;
 
-.btn:hover{
-    transform:translateY(2px);
-    color:#ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-    box-shadow:
-        0 0 15px rgba(255, 0, 0, 0.25),
-        0 0 30px rgba(255, 0, 0, 0.12);
-}
-.btn2{
-    display:block;
-    text-decoration:none;
-    font-family: "ObelixPro", sans-serif;
+        /* =========================
+           PROFILE
+        ========================= */
 
-    margin:14px 0;
-    padding:16px;
+        .profile {
+            text-align: center;
+            margin-bottom: 30px;
+        }
 
-    color:#ffffff;
-    font-weight:600;
-    letter-spacing:1px;
-    background-image: radial-gradient(circle at top center, rgb(207, 0, 230),rgb(166, 0, 255));
+        .avatar-wrap {
+            width: 116px;
+            height: 116px;
+            margin: 0 auto 18px;
 
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
+            padding: 3px;
+            border-radius: 50%;
 
-    border-radius:16px;
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--green),
+                    #00ff88,
+                    var(--purple)
+                );
 
-    transition:.25s ease;
+            box-shadow:
+                0 0 25px rgba(57,255,20,.25),
+                0 0 60px rgba(180,0,255,.12);
+        }
 
-    box-shadow:
-        0 0 10px rgba(144, 0, 255, 0.12),
-        inset 0 0 10px rgba(140, 0, 255, 0.04);
-}
-.btn2:hover{
-    transform:translateY(2px);
-    color:#ffffff;
+        .avatar {
+            width: 100%;
+            height: 100%;
 
-    box-shadow:
-        0 0 15px rgba(153, 0, 255, 0.25),
-        0 0 30px rgba(187, 0, 255, 0.12);
-}
-.avatar{
-    width:120px;
-    height:120px;
-    border-radius:50%;
-    object-fit:cover;
-    display:block;
-    margin:0 auto 20px auto;
-    border:3px solid #4cff1f;
-    box-shadow:0 0 25px rgba(31, 255, 50, 0.35);
-}
+            display: block;
 
-</style>
+            object-fit: cover;
+            border-radius: 50%;
+
+            border: 4px solid #080808;
+        }
+
+        .brand {
+            font-family: "ObelixPro", sans-serif;
+            font-size: clamp(52px, 10vw, 78px);
+            line-height: .9;
+            letter-spacing: 2px;
+
+            color: white;
+
+            text-shadow:
+                0 0 18px rgba(57,255,20,.14);
+        }
+
+        .brand span {
+            color: var(--green);
+        }
+
+        .tagline {
+            margin-top: 12px;
+
+            font-family: "ObelixPro", sans-serif;
+            font-size: 13px;
+            letter-spacing: 2.5px;
+
+            color: var(--muted);
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            margin-top: 16px;
+            padding: 7px 12px;
+
+            border: 1px solid rgba(57,255,20,.2);
+            border-radius: 999px;
+
+            background: rgba(57,255,20,.055);
+
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: rgba(255,255,255,.7);
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+            background: var(--green);
+
+            box-shadow:
+                0 0 8px var(--green);
+        }
+
+        /* =========================
+           LINKS
+        ========================= */
+
+        .links {
+            width: 100%;
+
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .link-card {
+            position: relative;
+
+            min-height: 72px;
+            padding: 14px 18px;
+
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            text-decoration: none;
+            color: white;
+
+            border: 1px solid var(--border);
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,.075),
+                    rgba(255,255,255,.025)
+                );
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 12px 30px rgba(0,0,0,.25),
+                inset 0 1px 0 rgba(255,255,255,.08);
+
+            overflow: hidden;
+
+            transition:
+                transform .25s ease,
+                border-color .25s ease,
+                box-shadow .25s ease,
+                background .25s ease;
+        }
+
+        .link-card::before {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    110deg,
+                    transparent 20%,
+                    rgba(255,255,255,.07) 50%,
+                    transparent 80%
+                );
+
+            transform: translateX(-120%);
+            transition: transform .6s ease;
+        }
+
+        .link-card:hover {
+            transform: translateY(-3px);
+
+            border-color: rgba(255,255,255,.25);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,.105),
+                    rgba(255,255,255,.035)
+                );
+
+            box-shadow:
+                0 18px 42px rgba(0,0,0,.38),
+                0 0 28px var(--glow);
+        }
+
+        .link-card:hover::before {
+            transform: translateX(120%);
+        }
+
+        .icon {
+            position: relative;
+            z-index: 1;
+
+            width: 44px;
+            height: 44px;
+            flex: 0 0 44px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 13px;
+
+            background: var(--icon-bg);
+            border: 1px solid var(--icon-border);
+
+            color: var(--icon);
+
+            box-shadow:
+                inset 0 1px 0 rgba(255,255,255,.1),
+                0 0 18px var(--icon-glow);
+        }
+
+        .icon svg {
+            width: 21px;
+            height: 21px;
+        }
+
+        .link-info {
+            position: relative;
+            z-index: 1;
+
+            min-width: 0;
+            flex: 1;
+        }
+
+        .link-title {
+            display: block;
+
+            font-family: "ObelixPro", sans-serif;
+            font-size: 15px;
+            letter-spacing: .8px;
+        }
+
+        .link-description {
+            display: block;
+
+            margin-top: 4px;
+
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .arrow {
+            position: relative;
+            z-index: 1;
+
+            width: 34px;
+            height: 34px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 50%;
+
+            color: rgba(255,255,255,.6);
+
+            transition:
+                transform .25s ease,
+                color .25s ease,
+                background .25s ease;
+        }
+
+        .link-card:hover .arrow {
+            transform: translate(3px,-3px);
+            color: white;
+            background: rgba(255,255,255,.08);
+        }
+
+        /* =========================
+           CHANNEL COLORS
+        ========================= */
+
+        .youtube {
+            --icon: #ff3045;
+            --icon-bg: rgba(255,30,55,.10);
+            --icon-border: rgba(255,40,60,.2);
+            --icon-glow: rgba(255,30,50,.18);
+            --glow: rgba(255,30,50,.13);
+        }
+
+        .twitch {
+            --icon: #b85cff;
+            --icon-bg: rgba(170,70,255,.11);
+            --icon-border: rgba(190,90,255,.22);
+            --icon-glow: rgba(180,70,255,.2);
+            --glow: rgba(180,70,255,.14);
+        }
+
+        .cs {
+            --icon: #39ff14;
+            --icon-bg: rgba(57,255,20,.08);
+            --icon-border: rgba(57,255,20,.18);
+            --icon-glow: rgba(57,255,20,.17);
+            --glow: rgba(57,255,20,.12);
+        }
+
+        .minecraft {
+            --icon: #64d96b;
+            --icon-bg: rgba(80,220,100,.09);
+            --icon-border: rgba(80,220,100,.18);
+            --icon-glow: rgba(80,220,100,.16);
+            --glow: rgba(80,220,100,.11);
+        }
+
+        .verse {
+            --icon: #00c8ff;
+            --icon-bg: rgba(0,190,255,.09);
+            --icon-border: rgba(0,200,255,.18);
+            --icon-glow: rgba(0,200,255,.17);
+            --glow: rgba(0,200,255,.11);
+        }
+
+        /* =========================
+           NEW SOCIAL COLORS
+        ========================= */
+
+        .discord {
+            --icon: #5865f2;
+            --icon-bg: rgba(88,101,242,.11);
+            --icon-border: rgba(88,101,242,.24);
+            --icon-glow: rgba(88,101,242,.22);
+            --glow: rgba(88,101,242,.16);
+        }
+
+        .instagram {
+            --icon: #ff4fa3;
+            --icon-bg: rgba(255,79,163,.10);
+            --icon-border: rgba(255,79,163,.22);
+            --icon-glow: rgba(255,79,163,.20);
+            --glow: rgba(255,79,163,.15);
+        }
+
+        .email {
+            --icon: #ffb52e;
+            --icon-bg: rgba(255,181,46,.10);
+            --icon-border: rgba(255,181,46,.22);
+            --icon-glow: rgba(255,181,46,.18);
+            --glow: rgba(255,181,46,.13);
+        }
+
+        /* =========================
+           SECTION LABEL
+        ========================= */
+
+        .section-label {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            margin: 28px 0 12px;
+
+            color: rgba(255,255,255,.35);
+
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .section-label::after {
+            content: "";
+            height: 1px;
+            flex: 1;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,.1),
+                    transparent
+                );
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            width: 100%;
+
+            margin-top: 32px;
+            padding-top: 20px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            border-top: 1px solid rgba(255,255,255,.07);
+        }
+
+        .footer-brand {
+            font-family: "ObelixPro", sans-serif;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        .footer-brand span {
+            color: var(--green);
+        }
+
+        .footer-text {
+            margin-top: 7px;
+
+            color: rgba(255,255,255,.35);
+            font-size: 9px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .page {
+                width: 100%;
+                padding: 28px 15px 22px;
+            }
+
+            .profile {
+                margin-bottom: 24px;
+            }
+
+            .avatar-wrap {
+                width: 88px;
+                height: 88px;
+                margin-bottom: 15px;
+            }
+
+            .brand {
+                font-size: 53px;
+            }
+
+            .tagline {
+                font-size: 10px;
+                letter-spacing: 1.8px;
+            }
+
+            .status {
+                margin-top: 13px;
+                font-size: 8px;
+            }
+
+            .links {
+                gap: 9px;
+            }
+
+            .link-card {
+                min-height: 64px;
+                padding: 10px 12px;
+                gap: 11px;
+                border-radius: 15px;
+            }
+
+            .icon {
+                width: 38px;
+                height: 38px;
+                flex-basis: 38px;
+                border-radius: 11px;
+            }
+
+            .icon svg {
+                width: 18px;
+                height: 18px;
+            }
+
+            .link-title {
+                font-size: 12px;
+                letter-spacing: .5px;
+            }
+
+            .link-description {
+                font-size: 9px;
+                margin-top: 3px;
+            }
+
+            .arrow {
+                width: 28px;
+                height: 28px;
+            }
+
+            .section-label {
+                margin-top: 23px;
+                font-size: 8px;
+            }
+
+            footer {
+                margin-top: 25px;
+            }
+        }
+
+        @media (max-width: 360px) {
+
+            .page {
+                padding-left: 11px;
+                padding-right: 11px;
+            }
+
+            .brand {
+                font-size: 47px;
+            }
+
+            .link-card {
+                min-height: 61px;
+            }
+
+            .link-description {
+                display: none;
+            }
+        }
+
+        /* =========================
+           REDUCED MOTION
+        ========================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
 </head>
-<script>
-function openYouTube() {
-    const webUrl = "https://www.youtube.com/@RaveOP8";
 
-    if (/Android/i.test(navigator.userAgent)) {
-        window.location.href =
-        "intent://www.youtube.com/@RaveOP8#Intent;package=com.google.android.youtube;scheme=https;S.browser_fallback_url=" +
-        encodeURIComponent(webUrl) + ";end";
-    } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-        window.location.href = "youtube://www.youtube.com/@RaveOP8";
-
-        setTimeout(() => {
-            window.location.href = webUrl;
-        }, 1500);
-    } else {
-        window.location.href = webUrl;
-    }
-}
-
-function openTwitch() {
-    const webUrl = "https://www.twitch.tv/ravexd_";
-
-    if (/Android/i.test(navigator.userAgent)) {
-        window.location.href =
-        "intent://www.twitch.tv/ravexd_#Intent;package=tv.twitch.android.app;scheme=https;S.browser_fallback_url=" +
-        encodeURIComponent(webUrl) + ";end";
-    } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-        window.location.href = "twitch://stream/ravexd_";
-
-        setTimeout(() => {
-            window.location.href = webUrl;
-        }, 1500);
-    } else {
-        window.location.href = webUrl;
-    }
-}
-</script>
 <body>
 
-<div class="container">
-<img
-  src="https://yt3.googleusercontent.com/T3yTtM1v1mmNcLsegmQJ9nQs0Gkw4e_aanEd1EFTuuP9PfiH9SlRvOOM4dbrB1llWN4En44Yrg=s160-c-k-c0x00ffffff-no-rj"
-  alt="RAVE Profile"
-  class="avatar">
-    <h1>RAVE</h1>
+<div class="background-noise"></div>
 
-    <p>Gamer & Streamer</p>
+<main class="page">
 
-    <a class="btn" href="./youtube.html">
-    YOUTUBE - RaveOP
+    <!-- =========================
+         PROFILE
+    ========================= -->
+
+    <section class="profile">
+
+        <div class="avatar-wrap">
+            <img
+                class="avatar"
+                src="https://yt3.googleusercontent.com/T3yTtM1v1mmNcLsegmQJ9nQs0Gkw4e_aanEd1EFTuuP9PfiH9SlRvOOM4dbrB1llWN4En44Yrg=s160-c-k-c0x00ffffff-no-rj"
+                alt="RAVE"
+            >
+        </div>
+
+        <h1 class="brand">
+            <span>RAVE</span>
+        </h1>
+
+        <p class="tagline">
+            GAMER • STREAMER • CREATOR
+        </p>
+
+        <div class="status">
+            <span class="status-dot"></span>
+            ONLINE • CREATING
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         MAIN CHANNELS
+    ========================= -->
+
+    <div class="section-label">
+        MAIN CHANNELS
+    </div>
+
+    <section class="links">
+
+        <!-- YOUTUBE -->
+
+        <a
+            class="link-card youtube"
+            href="https://www.youtube.com/@RaveOP8"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+
+            <div class="icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.9V8.1l6.5 3.9-6.5 3.9Z"/>
+                </svg>
+            </div>
+
+            <div class="link-info">
+                <span class="link-title">RaveOP8</span>
+                <span class="link-description">Main gaming channel</span>
+            </div>
+
+            <span class="arrow">↗</span>
+
+        </a>
+
+
+        <!-- TWITCH -->
+
+        <a
+            class="link-card twitch"
+            href="https://www.twitch.tv/ravexd_"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+
+            <div class="icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M4 2h18v13l-5 5h-4l-3 3H7v-3H2V6l2-4Zm1 3-1 3v8h4v3l3-3h5l4-4V5H5Zm9 7h-2V7h2v5Zm5 0h-2V7h2v5Z"/>
+                </svg>
+            </div>
+
+            <div class="link-info">
+                <span class="link-title">Twitch</span>
+                <span class="link-description">Live streams & community</span>
+            </div>
+
+            <span class="arrow">↗</span>
+
+        </a>
+
+    </section>
+
+
+    <!-- =========================
+         CONTENT CHANNELS
+    ========================= -->
+
+    <div class="section-label">
+        CONTENT CHANNELS
+    </div>
+
+    <section class="links">
+
+        <!-- CS / VALORANT -->
+
+        <a
+            class="link-card cs"
+            href="https://www.youtube.com/@RaveCS8"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+
+            <div class="icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.9V8.1l6.5 3.9-6.5 3.9Z"/>
+                </svg>
+            </div>
+
+            <div class="link-info">
+                <span class="link-title">RaveCS8</span>
+                <span class="link-description">CS2 • Valorant • Competitive gaming</span>
+            </div>
+
+            <span class="arrow">↗</span>
+
+        </a>
+
+
+        <!-- MINECRAFT -->
+
+        <a
+            class="link-card minecraft"
+            href="https://www.youtube.com/@RavePlaysXD"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+
+            <div class="icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3 4h18v16H3V4Zm3 3v3h3V7H6Zm6 0v3h3V7h-3Zm-6 6v3h3v-3H6Zm6 0v3h6v-3h-6Z"/>
+                </svg>
+            </div>
+
+            <div class="link-info">
+                <span class="link-title">Rave Plays</span>
+                <span class="link-description">Minecraft • Gaming • Content</span>
+            </div>
+
+            <span class="arrow">↗</span>
+
+        </a>
+
+
+        <!-- RAVEVERSE -->
+
+        <a
+            class="link-card verse"
+            href="https://www.youtube.com/@RaveVerseOP"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+
+            <div class="icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2 14.8 9.2 22 12l-7.2 2.8L12 22l-2.8-7.2L2 12l7.2-2.8L12 2Z"/>
+                </svg>
+            </div>
+
+            <div class="link-info">
+                <span class="link-title">RaveVerse</span>
+                <span class="link-description">Gaming • Entertainment • Videos</span>
+            </div>
+
+            <span class="arrow">↗</span>
+
+        </a>
+
+        <!-- SUHAS RAUT -->
+
+<a
+    class="link-card youtube"
+    href="https://www.youtube.com/@suhasraut24"
+    target="_blank"
+    rel="noopener noreferrer"
+>
+
+    <div class="icon">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.9V8.1l6.5 3.9 6.5-3.9v7.8l-6.5-3.9-6.5 3.9Z"/>
+        </svg>
+    </div>
+
+    <div class="link-info">
+        <span class="link-title">Suhas Raut</span>
+        <span class="link-description">Personal • Tech • Creator</span>
+    </div>
+
+    <span class="arrow">↗</span>
+
 </a>
 
-<a class="btn2" href="./twitch.html">
-    TWITCH
+    </section>
+
+
+    <!-- =========================
+         CONNECT WITH ME
+    ========================= -->
+
+    <div class="section-label">
+        CONNECT WITH ME
+    </div>
+
+    <section class="links">
+
+
+    <!-- WORK EMAIL -->
+
+        <a
+            class="link-card email"
+            href="mailto:suhasraut24@gmail.com"
+        >
+
+            <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="5" width="18" height="14" rx="2"/>
+                    <path d="m3 7 9 6 9-6"/>
+                </svg>
+            </div>
+
+            <div class="link-info">
+                <span class="link-title">Work Email</span>
+                <span class="link-description">Business & collaboration inquiries</span>
+            </div>
+
+            <span class="arrow">↗</span>
+
+        </a>
+
+
+        <!-- PERSONAL DISCORD -->
+
+<a
+    class="link-card discord"
+    href="https://discord.com/invite/APBQDEk7h3"
+    target="_blank"
+    rel="noopener noreferrer"
+>
+
+    <div class="icon">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19.54 5.32A16.9 16.9 0 0 0 15.5 4l-.5 1a15.4 15.4 0 0 0-6 0l-.5-1a16.9 16.9 0 0 0-4.04 1.32C1.9 9.2 1.2 12.96 1.5 16.67A16.7 16.7 0 0 0 6.4 19l1.18-1.62c-.65-.24-1.28-.54-1.88-.9l.46-.35c3.62 1.7 7.56 1.7 11.14 0l.47.35c-.6.36-1.23.66-1.89.9L17.06 19a16.7 16.7 0 0 0 4.9-2.33c.36-4.32-.62-8.04-2.42-11.35ZM8.7 14.6c-1.08 0-1.96-1-1.96-2.23s.86-2.24 1.96-2.24 1.97 1 1.96 2.24c0 1.23-.87 2.23-1.96 2.23Zm6.6 0c-1.08 0-1.96-1-1.96-2.23s.86-2.24 1.96-2.24 1.97 1 1.96 2.24c0 1.23-.87 2.23-1.96 2.23Z"/>
+        </svg>
+    </div>
+
+    <div class="link-info">
+        <span class="link-title">RaveOP Discord</span>
+        <span class="link-description">Join the RAVE community</span>
+    </div>
+
+    <span class="arrow">↗</span>
+
 </a>
 
- <a class="btn" href="./yt2.html">
-    YOUTUBE - RaveCS
+
+<!-- WORK DISCORD -->
+
+<a
+    class="link-card discord"
+    href="https://discord.com/invite/BtSyPXQdeX"
+    target="_blank"
+    rel="noopener noreferrer"
+>
+
+    <div class="icon">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19.54 5.32A16.9 16.9 0 0 0 15.5 4l-.5 1a15.4 15.4 0 0 0-6 0l-.5-1a16.9 16.9 0 0 0-4.04 1.32C1.9 9.2 1.2 12.96 1.5 16.67A16.7 16.7 0 0 0 6.4 19l1.18-1.62c-.65-.24-1.28-.54-1.88-.9l.46-.35c3.62 1.7 7.56 1.7 11.14 0l.47.35c-.6.36-1.23.66-1.89.9L17.06 19a16.7 16.7 0 0 0 4.9-2.33c.36-4.32-.62-8.04-2.42-11.35ZM8.7 14.6c-1.08 0-1.96-1-1.96-2.23s.86-2.24 1.96-2.24 1.97 1 1.96 2.24c0 1.23-.87 2.23-1.96 2.23Zm6.6 0c-1.08 0-1.96-1-1.96-2.23s.86-2.24 1.96-2.24 1.97 1 1.96 2.24c0 1.23-.87 2.24-1.96 2.24Z"/>
+        </svg>
+    </div>
+
+    <div class="link-info">
+        <span class="link-title">RaveGFX Discord</span>
+        <span class="link-description">Thumbnail Designing • Collaborations • Work</span>
+    </div>
+
+    <span class="arrow">↗</span>
+
 </a>
 
- <a class="btn" href="./yt3.html">
-    YOUTUBE - Rave Plays
-</a>
 
- <a class="btn" href="./yt4.html">
-    YOUTUBE - RaveVerse
-</a>
+        <!-- INSTAGRAM -->
 
-</div>
+        <a
+            class="link-card instagram"
+            href="YOUR_INSTAGRAM_LINK_HERE"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+
+            <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="5"/>
+                    <circle cx="12" cy="12" r="4"/>
+                    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+                </svg>
+            </div>
+
+            <div class="link-info">
+                <span class="link-title">Instagram</span>
+                <span class="link-description">Behind the scenes & updates</span>
+            </div>
+
+            <span class="arrow">↗</span>
+
+        </a>
+
+
+        
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <div class="footer-brand">
+            <span>RAVE</span>
+        </div>
+
+        <p class="footer-text">
+            Gamer • Streamer • Creator
+        </p>
+
+    </footer>
+
+</main>
 
 </body>
 </html>
