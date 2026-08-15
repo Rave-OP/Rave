@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>RAVEGFX — Portfolio</title>
+
+<style>
+
+@font-face {
+    font-family: "ObelixPro";
+    src: url("./fonts/ObelixPro.ttf") format("truetype");
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #050505;
+
+    color: white;
+
+    font-family: Arial, sans-serif;
+
+    overflow: hidden;
+
+}
+
+
+/* =========================
+   BACKGROUND
+========================= */
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 30% 30%,
+            rgba(0,229,255,.13),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 75% 65%,
+            rgba(180,0,255,.12),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(57,255,20,.08),
+            transparent 35%
+        );
+
+    pointer-events: none;
+
+}
+
+
+/* =========================
+   LOADER
+========================= */
+
+.loader {
+
+    width: min(90%, 430px);
+
+    text-align: center;
+
+    animation: fadeIn .7s ease forwards;
+
+}
+
+
+/* LOGO */
+
+.logo {
+
+    font-family: "ObelixPro", Arial, sans-serif;
+
+    font-size: clamp(48px, 13vw, 76px);
+
+    letter-spacing: 3px;
+
+    line-height: 1;
+
+    margin-bottom: 16px;
+
+    text-shadow:
+        0 0 20px rgba(0,229,255,.15),
+        0 0 45px rgba(180,0,255,.08);
+
+}
+
+.logo span {
+
+    color: #00e5ff;
+
+}
+
+
+/* SUBTITLE */
+
+.subtitle {
+
+    font-family: "ObelixPro", Arial, sans-serif;
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+    color: rgba(255,255,255,.5);
+
+    margin-bottom: 35px;
+
+}
+
+
+/* LOADING BOX */
+
+.loading-box {
+
+    width: 100%;
+
+    padding: 18px 20px;
+
+    border-radius: 18px;
+
+    border: 1px solid rgba(255,255,255,.12);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.07),
+            rgba(255,255,255,.025)
+        );
+
+    backdrop-filter: blur(18px);
+
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.07);
+
+}
+
+
+/* TEXT */
+
+.loading-text {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 12px;
+
+    font-size: 10px;
+
+    letter-spacing: 1.5px;
+
+    color: rgba(255,255,255,.6);
+
+}
+
+.loading-text span:last-child {
+
+    color: #00e5ff;
+
+}
+
+
+/* PROGRESS */
+
+.progress {
+
+    width: 100%;
+
+    height: 4px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: rgba(255,255,255,.08);
+
+}
+
+.progress-bar {
+
+    width: 0%;
+
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00e5ff,
+            #b400ff
+        );
+
+    box-shadow:
+        0 0 15px rgba(0,229,255,.5);
+
+    animation: loading 1.8s ease forwards;
+
+}
+
+
+/* STATUS */
+
+.status {
+
+    margin-top: 16px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 9px;
+
+    letter-spacing: 1.5px;
+
+    color: rgba(255,255,255,.35);
+
+}
+
+.dot {
+
+    width: 6px;
+
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #00e5ff;
+
+    box-shadow:
+        0 0 8px #00e5ff;
+
+    animation: pulse 1s infinite;
+
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes loading {
+
+    0% {
+        width: 0%;
+    }
+
+    40% {
+        width: 45%;
+    }
+
+    75% {
+        width: 78%;
+    }
+
+    100% {
+        width: 100%;
+    }
+
+}
+
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+@keyframes pulse {
+
+    0% {
+        opacity: .35;
+        transform: scale(.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: .35;
+        transform: scale(.8);
+    }
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="loader">
+
+    <div class="logo">
+        <span>RAVE</span>GFX
+    </div>
+
+    <div class="subtitle">
+        THUMBNAIL DESIGNER • CREATIVE WORK
+    </div>
+
+
+    <div class="loading-box">
+
+        <div class="loading-text">
+
+            <span id="loadingText">
+                OPENING PORTFOLIO
+            </span>
+
+            <span id="percentage">
+                0%
+            </span>
+
+        </div>
+
+
+        <div class="progress">
+
+            <div
+                class="progress-bar"
+                id="progressBar"
+            ></div>
+
+        </div>
+
+
+        <div class="status">
+
+            <span class="dot"></span>
+
+            <span>
+                REDIRECTING TO RAVEGFX
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const portfolioUrl =
+    "https://rave-portfolio-one.vercel.app/";
+
+
+const percentage =
+    document.getElementById("percentage");
+
+const loadingText =
+    document.getElementById("loadingText");
+
+
+let progress = 0;
+
+
+const interval = setInterval(() => {
+
+    progress += Math.floor(Math.random() * 8) + 4;
+
+
+    if (progress >= 100) {
+
+        progress = 100;
+
+        clearInterval(interval);
+
+    }
+
+
+    percentage.textContent =
+        progress + "%";
+
+
+    if (progress >= 30 && progress < 65) {
+
+        loadingText.textContent =
+            "LOADING PORTFOLIO";
+
+    }
+
+
+    if (progress >= 65 && progress < 90) {
+
+        loadingText.textContent =
+            "PREPARING SHOWCASE";
+
+    }
+
+
+    if (progress >= 90) {
+
+        loadingText.textContent =
+            "OPENING RAVEGFX";
+
+    }
+
+}, 100);
+
+
+/*
+    Redirect after loading
+*/
+
+setTimeout(() => {
+
+    window.location.href =
+        portfolioUrl;
+
+}, 1900);
+
+</script>
+
+
+</body>
+
+</html>
