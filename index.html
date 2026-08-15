@@ -655,6 +655,7 @@
 <script>
 function openYouTube(webUrl) {
 
+    // ANDROID
     if (/Android/i.test(navigator.userAgent)) {
 
         window.location.href =
@@ -664,26 +665,34 @@ function openYouTube(webUrl) {
             encodeURIComponent(webUrl) +
             ";end";
 
-    } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        return;
+    }
+
+    // iPHONE / iPAD
+    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
 
         window.location.href =
             "youtube://" +
-            webUrl.replace("https://www.youtube.com/", "www.youtube.com/");
+            webUrl.replace(
+                "https://www.youtube.com/",
+                "www.youtube.com/"
+            );
 
         setTimeout(() => {
             window.location.href = webUrl;
         }, 1500);
 
-    } else {
-
-        window.location.href = webUrl;
-
+        return;
     }
+
+    // DESKTOP
+    window.location.href = webUrl;
 }
 
 
 function openTwitch(webUrl) {
 
+    // ANDROID
     if (/Android/i.test(navigator.userAgent)) {
 
         window.location.href =
@@ -693,7 +702,11 @@ function openTwitch(webUrl) {
             encodeURIComponent(webUrl) +
             ";end";
 
-    } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        return;
+    }
+
+    // iPHONE / iPAD
+    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
 
         window.location.href =
             "twitch://stream/ravexd_";
@@ -702,11 +715,11 @@ function openTwitch(webUrl) {
             window.location.href = webUrl;
         }, 1500);
 
-    } else {
-
-        window.location.href = webUrl;
-
+        return;
     }
+
+    // DESKTOP
+    window.location.href = webUrl;
 }
 </script>
 <body>
