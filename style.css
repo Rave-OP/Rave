@@ -2662,3 +2662,86 @@ footer {
     }
 
 }
+
+/* =========================================================
+   RAVE — HOSTING SAFE CAROUSEL
+========================================================= */
+
+.media-carousel {
+    width: 100%;
+    overflow: hidden !important;
+    position: relative;
+    cursor: grab;
+}
+
+.media-carousel.dragging {
+    cursor: grabbing;
+}
+
+.media-track {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 24px;
+    width: max-content !important;
+
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+
+    padding-bottom: 8px;
+}
+
+.media-card {
+    flex: 0 0 auto !important;
+}
+
+.video-card-16 {
+    width: min(620px, 70vw) !important;
+}
+
+.video-card-16 .media-frame {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    position: relative;
+}
+
+.video-card-16 iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+}
+
+.short-card {
+    width: min(300px, 42vw) !important;
+}
+
+.short-card .media-frame {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    overflow: hidden;
+    position: relative;
+}
+
+.short-card iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+}
+
+@media (max-width: 768px) {
+
+    .video-card-16 {
+        width: 85vw !important;
+    }
+
+    .short-card {
+        width: 62vw !important;
+    }
+
+    .media-track {
+        gap: 16px;
+    }
+
+}
