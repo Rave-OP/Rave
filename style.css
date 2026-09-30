@@ -500,7 +500,7 @@ body::after {
 
     color: rgba(255,255,255,.35);
 
-    font-size: 9px;
+    font-size: 19px;
     font-weight: 700;
     letter-spacing: 2px;
 }
@@ -2254,6 +2254,411 @@ footer {
         transform: translateX(
             calc(-50% - 12px)
         );
+    }
+
+}
+
+/*Shorts and Videos Feed*/
+
+/* =====================================================
+   RAVE MEDIA CAROUSELS
+===================================================== */
+
+.carousel-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin: 38px 0 18px;
+}
+
+.carousel-heading > div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,.65);
+}
+
+.carousel-line {
+    width: 22px;
+    height: 2px;
+    background: #ff8f00;
+}
+
+
+/* =====================================================
+   CONTROLS
+===================================================== */
+
+.carousel-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.carousel-btn {
+    width: 40px;
+    height: 40px;
+
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 8px;
+
+    background: rgba(255,255,255,.04);
+    color: #fff;
+
+    cursor: pointer;
+
+    font-size: 17px;
+
+    transition: .25s ease;
+}
+
+.carousel-btn:hover {
+    background: #ff8f00;
+    border-color: #ff8f00;
+    color: #000;
+}
+
+
+/* =====================================================
+   CAROUSEL
+===================================================== */
+
+.media-carousel {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scroll-behavior: smooth;
+
+    scrollbar-width: none;
+
+    cursor: grab;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+.media-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.media-carousel.dragging {
+    cursor: grabbing;
+    scroll-behavior: auto;
+}
+
+
+/* =====================================================
+   TRACK
+===================================================== */
+
+.media-track {
+    display: flex;
+    gap: 24px;
+
+    width: max-content;
+
+    padding-bottom: 8px;
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.media-card {
+    flex: 0 0 auto;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 16px;
+
+    background: rgba(255,255,255,.025);
+
+    transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+}
+
+.media-card:hover {
+    transform: translateY(-5px);
+
+    border-color: rgba(255,143,0,.45);
+
+    box-shadow: 0 15px 45px rgba(0,0,0,.35);
+}
+
+
+/* =====================================================
+   16:9 VIDEO CARDS
+===================================================== */
+
+.video-card-16 {
+    width: min(620px, 70vw);
+}
+
+.video-card-16 .media-frame {
+    aspect-ratio: 16 / 9;
+}
+
+
+/* =====================================================
+   SHORT CARDS
+===================================================== */
+
+.short-card {
+    width: min(300px, 42vw);
+}
+
+.short-card .media-frame {
+    aspect-ratio: 9 / 16;
+}
+
+
+/* =====================================================
+   YOUTUBE FRAME
+===================================================== */
+
+.media-frame {
+    position: relative;
+
+    width: 100%;
+
+    background: #000;
+
+    overflow: hidden;
+}
+
+.media-frame iframe {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    border: 0;
+
+    display: block;
+}
+
+
+/* =====================================================
+   INFO
+===================================================== */
+
+.media-info {
+    padding: 16px 18px 18px;
+}
+
+.media-info span {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #ff8f00;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.media-info h3 {
+    margin: 0;
+
+    color: #fff;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.media-info p {
+    margin: 5px 0 0;
+
+    color: rgba(255,255,255,.48);
+
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   LIVE
+===================================================== */
+
+.live-label {
+    position: absolute;
+
+    top: 14px;
+    left: 14px;
+
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 7px 11px;
+
+    border-radius: 6px;
+
+    background: rgba(0,0,0,.85);
+
+    color: #fff;
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+
+    z-index: 5;
+}
+
+.live-label i {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #ff3030;
+
+    box-shadow: 0 0 10px rgba(255,48,48,.8);
+}
+
+
+/* =====================================================
+   SHORTS SPACING
+===================================================== */
+
+.shorts-heading {
+    margin-top: 55px;
+}
+
+.shorts-carousel .media-track {
+    gap: 20px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .video-card-16 {
+        width: 86vw;
+    }
+
+    .short-card {
+        width: 54vw;
+    }
+
+    .media-track {
+        gap: 16px;
+    }
+
+    .carousel-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .media-info {
+        padding: 13px 14px 15px;
+    }
+
+    .media-info h3 {
+        font-size: 15px;
+    }
+
+}
+
+/* =========================================================
+   RAVE VIDEO CAROUSEL — FINAL FIX
+========================================================= */
+
+.media-carousel {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    cursor: grab;
+}
+
+.media-carousel.dragging {
+    cursor: grabbing;
+}
+
+.media-track {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 24px;
+    width: max-content;
+
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+
+    padding-bottom: 8px;
+}
+
+.media-card {
+    flex: 0 0 auto;
+}
+
+/* 16:9 YouTube videos */
+
+.video-card-16 {
+    width: min(620px, 70vw);
+}
+
+.video-card-16 .media-frame {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    position: relative;
+}
+
+.video-card-16 iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+}
+
+/* Shorts */
+
+.short-card {
+    width: min(300px, 42vw);
+}
+
+.short-card .media-frame {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    overflow: hidden;
+    position: relative;
+}
+
+.short-card iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .video-card-16 {
+        width: 85vw;
+    }
+
+    .short-card {
+        width: 62vw;
+    }
+
+    .media-track {
+        gap: 16px;
     }
 
 }

@@ -1,211 +1,477 @@
-/* =========================================================
-   RAVE DESKTOP WEBSITE
-========================================================= */
-
 
 /* =========================================================
-   NAVBAR SCROLL EFFECT
+   RAVE — VIDEO CAROUSEL
+   Infinite automatic movement
 ========================================================= */
 
-const navbar = document.querySelector(".navbar");
+document.addEventListener("DOMContentLoaded", function () {
 
-window.addEventListener("scroll", () => {
+    const carousels = document.querySelectorAll(".media-carousel");
 
-    if (!navbar) return;
-
-    if (window.scrollY > 40) {
-
-        navbar.classList.add("scrolled");
-
-    } else {
-
-        navbar.classList.remove("scrolled");
-
+    if (!carousels.length) {
+        console.warn("RAVE Carousel: No carousels found.");
+        return;
     }
 
-});
+
+    carousels.forEach(function (carousel) {
+
+        const track = carousel.querySelector(".media-track");
+
+        if (!track) {
+            console.warn("RAVE Carousel: .media-track not found.");
+            return;
+        }
 
 
-/* =========================================================
-   ACTIVE NAVIGATION
-========================================================= */
+        const cards = Array.from(track.children);
 
-const sections = document.querySelectorAll("section[id]");
-const navLinks = document.querySelectorAll(".nav-link");
+        if (cards.length < 2) {
+            console.warn(
+                "RAVE Carousel: At least 2 cards are required."
+            );
+            return;
+        }
 
-const updateActiveNavigation = () => {
 
-    const scrollPosition =
-        window.scrollY + 180;
+        /* -------------------------------------------------
+           STATE
+        ------------------------------------------------- */
 
-    sections.forEach(section => {
+        let position = 0;
 
-        const sectionTop =
-            section.offsetTop;
+        let lastTime = performance.now();
 
-        const sectionHeight =
-            section.offsetHeight;
+        let paused = false;
 
-        const sectionId =
-            section.getAttribute("id");
+        let dragging = false;
 
-        if (
-            scrollPosition >= sectionTop &&
-            scrollPosition < sectionTop + sectionHeight
-        ) {
+        let startX = 0;
 
-            navLinks.forEach(link => {
+        let startPosition = 0;
 
-                link.classList.remove("active");
+        const speed = 35;
+
+
+        /* -------------------------------------------------
+           GET GAP
+        ------------------------------------------------- */
+
+        function getGap() {
+
+            const style =
+                window.getComputedStyle(track);
+
+            return parseFloat(style.columnGap || style.gap) || 0;
+
+        }
+
+
+        /* -------------------------------------------------
+           GET FIRST CARD WIDTH
+        ------------------------------------------------- */
+
+        function getFirstCardWidth() {
+
+            const firstCard =
+                track.children[0];
+
+            if (!firstCard) {
+                return 0;
+            }
+
+            return firstCard.getBoundingClientRect().width;
+
+        }
+
+
+        /* -------------------------------------------------
+           APPLY POSITION
+        ------------------------------------------------- */
+
+        function updatePosition() {
+
+            track.style.transform =
+                `translate3d(${position}px, 0, 0)`;
+
+        }
+
+
+        /* -------------------------------------------------
+           AUTO ANIMATION
+        ------------------------------------------------- */
+
+        function animate(currentTime) {
+
+            const delta =
+                (currentTime - lastTime) / 1000;
+
+            lastTime = currentTime;
+
+
+            if (!paused && !dragging) {
+
+                position -= speed * delta;
+
+
+                const cardWidth =
+                    getFirstCardWidth();
+
+                const gap =
+                    getGap();
+
+                const moveDistance =
+                    cardWidth + gap;
+
+
+                /*
+                 * When the first card has completely
+                 * left the screen:
+                 *
+                 * 1. Move it to the end
+                 * 2. Compensate the transform
+                 *
+                 * This creates the infinite loop.
+                 */
 
                 if (
-                    link.getAttribute("href") ===
-                    `#${sectionId}`
+                    moveDistance > 0 &&
+                    Math.abs(position) >= moveDistance
                 ) {
 
-                    link.classList.add("active");
+                    position += moveDistance;
+
+                    track.appendChild(
+                        track.children[0]
+                    );
 
                 }
 
-            });
+
+                updatePosition();
+
+            }
+
+
+            requestAnimationFrame(animate);
 
         }
+
+
+        requestAnimationFrame(animate);
+
+
+        /* -------------------------------------------------
+           PAUSE ON HOVER
+        ------------------------------------------------- */
+
+        carousel.addEventListener(
+            "mouseenter",
+            function () {
+
+                paused = true;
+
+            }
+        );
+
+
+        carousel.addEventListener(
+            "mouseleave",
+            function () {
+
+                if (!dragging) {
+
+                    paused = false;
+
+                }
+
+            }
+        );
+
+
+        /* -------------------------------------------------
+           MOUSE DRAG
+        ------------------------------------------------- */
+
+        carousel.addEventListener(
+            "mousedown",
+            function (event) {
+
+                dragging = true;
+
+                paused = true;
+
+                startX = event.clientX;
+
+                startPosition = position;
+
+                carousel.classList.add(
+                    "dragging"
+                );
+
+                event.preventDefault();
+
+            }
+        );
+
+
+        window.addEventListener(
+            "mousemove",
+            function (event) {
+
+                if (!dragging) {
+                    return;
+                }
+
+
+                const distance =
+                    event.clientX - startX;
+
+
+                position =
+                    startPosition + distance;
+
+
+                updatePosition();
+
+            }
+        );
+
+
+        window.addEventListener(
+            "mouseup",
+            function () {
+
+                if (!dragging) {
+                    return;
+                }
+
+
+                dragging = false;
+
+                carousel.classList.remove(
+                    "dragging"
+                );
+
+
+                /*
+                 * Give the user a moment before
+                 * automatic movement starts again.
+                 */
+
+                setTimeout(function () {
+
+                    paused = false;
+
+                }, 1000);
+
+            }
+        );
+
+
+        /* -------------------------------------------------
+           TOUCH / MOBILE
+        ------------------------------------------------- */
+
+        carousel.addEventListener(
+            "touchstart",
+            function (event) {
+
+                dragging = true;
+
+                paused = true;
+
+                startX =
+                    event.touches[0].clientX;
+
+                startPosition = position;
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+        carousel.addEventListener(
+            "touchmove",
+            function (event) {
+
+                if (!dragging) {
+                    return;
+                }
+
+
+                const currentX =
+                    event.touches[0].clientX;
+
+
+                const distance =
+                    currentX - startX;
+
+
+                position =
+                    startPosition + distance;
+
+
+                updatePosition();
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+        carousel.addEventListener(
+            "touchend",
+            function () {
+
+                dragging = false;
+
+
+                setTimeout(function () {
+
+                    paused = false;
+
+                }, 1000);
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+        /* -------------------------------------------------
+           ARROW BUTTONS
+        ------------------------------------------------- */
+
+        const carouselName =
+            carousel.id.replace(
+                "-carousel",
+                ""
+            );
+
+
+        const buttons =
+            document.querySelectorAll(
+                `.carousel-btn[data-carousel="${carouselName}"]`
+            );
+
+
+        buttons.forEach(function (button) {
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    const direction =
+                        Number(
+                            button.dataset.direction
+                        );
+
+
+                    const cardWidth =
+                        getFirstCardWidth();
+
+                    const gap =
+                        getGap();
+
+                    const distance =
+                        cardWidth + gap;
+
+
+                    if (direction > 0) {
+
+                        /*
+                         * Move next card into view.
+                         */
+
+                        position -= distance;
+
+
+                        updatePosition();
+
+
+                        setTimeout(function () {
+
+                            if (track.children.length) {
+
+                                track.appendChild(
+                                    track.children[0]
+                                );
+
+                                position += distance;
+
+                                updatePosition();
+
+                            }
+
+                        }, 350);
+
+                    } else {
+
+                        /*
+                         * Move previous card.
+        		         *
+                         * Put the last card first,
+                         * then shift track backwards.
+                         */
+
+                        const lastCard =
+                            track.lastElementChild;
+
+
+                        if (!lastCard) {
+                            return;
+                        }
+
+
+                        track.insertBefore(
+                            lastCard,
+                            track.firstElementChild
+                        );
+
+
+                        position -= distance;
+
+                        updatePosition();
+
+
+                        requestAnimationFrame(
+                            function () {
+
+                                position += distance;
+
+                                updatePosition();
+
+                            }
+                        );
+
+                    }
+
+
+                    /*
+                     * Temporarily pause automatic
+                     * movement after arrow click.
+                     */
+
+                    paused = true;
+
+
+                    setTimeout(function () {
+
+                        paused = false;
+
+                    }, 1000);
+
+                }
+            );
+
+        });
 
     });
 
-};
-
-
-window.addEventListener(
-    "scroll",
-    updateActiveNavigation
-);
-
-updateActiveNavigation();
-
-
-/* =========================================================
-   SMOOTH NAVIGATION
-========================================================= */
-
-document.querySelectorAll(
-    'a[href^="#"]'
-).forEach(link => {
-
-    link.addEventListener(
-        "click",
-        event => {
-
-            const targetId =
-                link.getAttribute("href");
-
-            const target =
-                document.querySelector(targetId);
-
-            if (!target) return;
-
-            event.preventDefault();
-
-            const navbarHeight =
-                navbar
-                    ? navbar.offsetHeight + 25
-                    : 100;
-
-            const targetPosition =
-                target.offsetTop -
-                navbarHeight;
-
-            window.scrollTo({
-
-                top: targetPosition,
-
-                behavior: "smooth"
-
-            });
-
-        }
-    );
-
 });
 
-
-/* =========================================================
-   VIDEO HOVER
-========================================================= */
-
-const videoCards =
-    document.querySelectorAll(".video-card");
-
-videoCards.forEach(card => {
-
-    card.addEventListener(
-        "mouseenter",
-        () => {
-
-            card.classList.add("hovered");
-
-        }
-    );
-
-    card.addEventListener(
-        "mouseleave",
-        () => {
-
-            card.classList.remove("hovered");
-
-        }
-    );
-
-});
-
-
-/* =========================================================
-   IMAGE LOAD EFFECT
-========================================================= */
-
-const images =
-    document.querySelectorAll("img");
-
-images.forEach(image => {
-
-    image.addEventListener(
-        "load",
-        () => {
-
-            image.classList.add("loaded");
-
-        }
-    );
-
-});
-
-
-/* =========================================================
-   EXTERNAL LINKS
-========================================================= */
-
-document.querySelectorAll(
-    'a[target="_blank"]'
-).forEach(link => {
-
-    link.setAttribute(
-        "rel",
-        "noopener noreferrer"
-    );
-
-});
-
-
-/* =========================================================
-   CURRENT YEAR
-========================================================= */
-
-const footerCopy =
-    document.querySelector(".footer-copy");
-
-if (footerCopy) {
-
-    footerCopy.textContent =
-        `© ${new Date().getFullYear()} RAVE`;
-
-}

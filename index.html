@@ -141,242 +141,287 @@
 
             <!-- LATEST VIDEOS -->
             <!-- LATEST VIDEOS -->
-<section class="section latest-section">
+<!-- =====================================================
+     RAVE VIDEO CAROUSELS
+====================================================== -->
+
+<section class="section latest-section" id="latest">
 
     <div class="eyebrow">
         <span></span>
-        HOME
+        LATEST CONTENT
     </div>
 
     <div class="section-heading">
-
         <h2>
             LATEST <span>VIDEOS</span>
         </h2>
+    </div>
+
+
+    <!-- =================================================
+         16:9 VIDEOS + LIVE STREAMS
+    ================================================== -->
+
+    <div class="carousel-heading">
+        <div>
+            <span class="carousel-line"></span>
+            <span>VIDEOS & LIVE STREAMS</span>
+        </div>
+
+        <div class="carousel-controls">
+            <button class="carousel-btn" data-carousel="videos" data-direction="-1">
+                ←
+            </button>
+
+            <button class="carousel-btn" data-carousel="videos" data-direction="1">
+                →
+            </button>
+        </div>
+    </div>
+
+
+    <div class="media-carousel" id="videos-carousel">
+
+        <div class="media-track">
+
+            <!-- VIDEO 1 -->
+            <article class="media-card video-card-16">
+
+                <div class="media-frame">
+                    <iframe
+                        src="https://www.youtube.com/embed/NrvT3Zc43oE"
+                        title="RAVE Video 1"
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                    <span class="live-label">
+                        <i></i>
+                        LIVE
+                    </span>
+                </div>
+
+                <div class="media-info">
+                    <span>RAVEOP</span>
+                    <h3>Latest Gaming Video</h3>
+                    <p>Gaming • Entertainment</p>
+                </div>
+
+            </article>
+
+
+            <!-- VIDEO 2 -->
+            <article class="media-card video-card-16">
+
+                <div class="media-frame">
+                    <iframe
+                        src="https://www.youtube.com/embed/77GnEEBi-ok"
+                        title="RAVE Video 2"
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                    <span class="live-label">
+                        <i></i>
+                        LIVE
+                    </span>
+                </div>
+
+                <div class="media-info">
+                    <span>RAVEOP</span>
+                    <h3>Latest Gaming Video</h3>
+                    <p>Gaming • Entertainment</p>
+                </div>
+
+            </article>
+
+
+            <!-- LIVE STREAM -->
+            <article class="media-card video-card-16 live-media">
+
+                <div class="media-frame">
+
+                    <iframe
+                        src="https://www.youtube.com/embed/8SuLbBoRoa8"
+                        title="RAVE Live Stream"
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+
+                    <span class="live-label">
+                        <i></i>
+                        LIVE
+                    </span>
+
+                </div>
+
+                <div class="media-info">
+                    <span>RAVEOP</span>
+                    <h3>Live Stream</h3>
+                    <p>Gaming • Live</p>
+                </div>
+
+            </article>
+
+
+            <!-- VIDEO 4 -->
+            <article class="media-card video-card-16">
+
+                <div class="media-frame">
+                    <iframe
+                        src="https://www.youtube.com/embed/4qaEc_nCGfE"
+                        title="RAVE Video 4"
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                    <span class="live-label">
+                        <i></i>
+                        LIVE
+                    </span>
+                </div>
+
+                <div class="media-info">
+                    <span>RAVEOP</span>
+                    <h3>Latest Gaming Video</h3>
+                    <p>Gaming • Entertainment</p>
+                </div>
+
+            </article>
+
+
+            <!--
+                ADD MORE VIDEOS HERE
+
+                Example:
+
+                <article class="media-card video-card-16">
+
+                    <div class="media-frame">
+                        <iframe
+                            src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+                            title="RAVE Video"
+                            loading="lazy"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+
+                    <div class="media-info">
+                        <span>RAVEOP</span>
+                        <h3>Your Video Title</h3>
+                        <p>Gaming • Entertainment</p>
+                    </div>
+
+                </article>
+            -->
+
+        </div>
 
     </div>
 
 
-    <div class="video-slider">
 
-        <div class="video-track">
+    <!-- =================================================
+         SHORTS
+    ================================================== -->
 
-            <!-- VIDEO 1 -->
-            <a href="https://www.youtube.com/live/8SuLbBoRoa8?si=vGUqc0XONkBTtp4L" class="video-card">
+    <div class="carousel-heading shorts-heading">
 
-                <div class="video-thumbnail">
+        <div>
+            <span class="carousel-line"></span>
+            <span>SHORTS</span>
+        </div>
 
-                    <img
-                        src="./img/thumb1.jpg"
-                        alt="Latest RAVEOP video"
-                    >
+        <div class="carousel-controls">
+            <button class="carousel-btn" data-carousel="shorts" data-direction="-1">
+                ←
+            </button>
 
-                    <span class="play-button">▶</span>
+            <button class="carousel-btn" data-carousel="shorts" data-direction="1">
+                →
+            </button>
+        </div>
 
-                    <span class="video-channel">
-                        RAVEOP
-                    </span>
-
-                </div>
-
-                <div class="video-info">
-
-                    <h3>Video Title</h3>
-
-                    <p>Gaming • Latest upload</p>
-
-                </div>
-
-            </a>
+    </div>
 
 
-            <!-- VIDEO 2 -->
-            <a href="#" class="video-card">
+    <div class="media-carousel shorts-carousel" id="shorts-carousel">
 
-                <div class="video-thumbnail">
+        <div class="media-track">
 
-                    <img
-                        src="./img/thumb2.jpg"
-                        alt="Latest RAVEXD video"
-                    >
 
-                    <span class="play-button">▶</span>
+            <!-- SHORT 1 -->
+            <article class="media-card short-card">
 
-                    <span class="video-channel">
-                        RAVEXD
-                    </span>
+                <div class="media-frame">
+
+                    <iframe
+                        src="https://www.youtube.com/embed/3qffRy-NQG0"
+                        title="RAVE Short 1"
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
 
                 </div>
 
-                <div class="video-info">
+                <div class="media-info">
+                    <span>RAVE SHORTS</span>
+                    <h3>Latest Short</h3>
+                    <p>Gaming • Shorts</p>
+                </div>
 
-                    <h3>Video Title</h3>
+            </article>
 
-                    <p>CS2 • Valorant</p>
+
+            <!-- SHORT 2 -->
+            <article class="media-card short-card">
+
+                <div class="media-frame">
+
+                    <iframe
+                        src="https://www.youtube.com/embed/oM9_rsmyzqw"
+                        title="RAVE Short 2"
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
 
                 </div>
 
-            </a>
-
-
-            <!-- VIDEO 3 -->
-            <a href="#" class="video-card">
-
-                <div class="video-thumbnail">
-
-                    <img
-                        src="./img/thumb3.jpg"
-                        alt="Latest Rave Plays video"
-                    >
-
-                    <span class="play-button">▶</span>
-
-                    <span class="video-channel">
-                        RAVE PLAYS
-                    </span>
-
+                <div class="media-info">
+                    <span>RAVE SHORTS</span>
+                    <h3>Latest Short</h3>
+                    <p>Gaming • Shorts</p>
                 </div>
 
-                <div class="video-info">
-
-                    <h3>Video Title</h3>
-
-                    <p>Minecraft • Gaming</p>
-
-                </div>
-
-            </a>
-
-
-            <!-- VIDEO 4 -->
-            <a href="#" class="video-card">
-
-                <div class="video-thumbnail">
-
-                    <img
-                        src="./img/thumb4.jpg"
-                        alt="Latest RaveVerse video"
-                    >
-
-                    <span class="play-button">▶</span>
-
-                    <span class="video-channel">
-                        RAVEVERSE
-                    </span>
-
-                </div>
-
-                <div class="video-info">
-
-                    <h3>Video Title</h3>
-
-                    <p>Gaming • Entertainment</p>
-
-                </div>
-
-            </a>
-
-
-            <!-- DUPLICATES FOR SEAMLESS LOOP -->
-
-            <a href="#" class="video-card">
-
-                <div class="video-thumbnail">
-
-                    <img src="./img/thumb1.jpg" alt="Latest RAVEOP video">
-
-                    <span class="play-button">▶</span>
-
-                    <span class="video-channel">
-                        RAVEOP
-                    </span>
-
-                </div>
-
-                <div class="video-info">
-
-                    <h3>Video Title</h3>
-
-                    <p>Gaming • Latest upload</p>
-
-                </div>
-
-            </a>
-
-
-            <a href="#" class="video-card">
-
-                <div class="video-thumbnail">
-
-                    <img src="./img/thumb2.jpg" alt="Latest RAVEXD video">
-
-                    <span class="play-button">▶</span>
-
-                    <span class="video-channel">
-                        RAVEXD
-                    </span>
-
-                </div>
-
-                <div class="video-info">
-
-                    <h3>Video Title</h3>
-
-                    <p>CS2 • Valorant</p>
-
-                </div>
-
-            </a>
-
-
-            <a href="#" class="video-card">
-
-                <div class="video-thumbnail">
-
-                    <img src="./img/thumb3.jpg" alt="Latest Rave Plays video">
-
-                    <span class="play-button">▶</span>
-
-                    <span class="video-channel">
-                        RAVE PLAYS
-                    </span>
-
-                </div>
-
-                <div class="video-info">
-
-                    <h3>Video Title</h3>
-
-                    <p>Minecraft • Gaming</p>
-
-                </div>
-
-            </a>
-
-
-            <a href="#" class="video-card">
-
-                <div class="video-thumbnail">
-
-                    <img src="./img/thumb4.jpg" alt="Latest RaveVerse video">
-
-                    <span class="play-button">▶</span>
-
-                    <span class="video-channel">
-                        RAVEVERSE
-                    </span>
-
-                </div>
-
-                <div class="video-info">
-
-                    <h3>Video Title</h3>
-
-                    <p>Gaming • Entertainment</p>
-
-                </div>
-
-            </a>
+            </article>
+
+
+            <!--
+                ADD MORE SHORTS HERE
+
+                <article class="media-card short-card">
+
+                    <div class="media-frame">
+                        <iframe
+                            src="https://www.youtube.com/embed/YOUR_SHORT_ID"
+                            title="RAVE Short"
+                            loading="lazy"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+
+                    <div class="media-info">
+                        <span>RAVE SHORTS</span>
+                        <h3>Your Short Title</h3>
+                        <p>Gaming • Shorts</p>
+                    </div>
+
+                </article>
+            -->
 
         </div>
 
@@ -1437,6 +1482,6 @@
 
 
     </div>
-
+<script src="script.js"></script>
 </body>
 </html>
