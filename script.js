@@ -475,3 +475,555 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+
+/* =========================================================
+   RAVE — HOSTING SAFE VIDEO CAROUSEL
+========================================================= */
+
+(function () {
+
+    "use strict";
+
+
+    function initRaveCarousels() {
+
+        const carousels =
+            document.querySelectorAll(".media-carousel");
+
+
+        console.log(
+            "RAVE Carousel:",
+            carousels.length,
+            "carousel(s) found."
+        );
+
+
+        if (!carousels.length) {
+            return;
+        }
+
+
+        carousels.forEach(function (carousel) {
+
+            const track =
+                carousel.querySelector(".media-track");
+
+
+            if (!track) {
+                console.warn(
+                    "RAVE Carousel: track missing",
+                    carousel
+                );
+
+                return;
+            }
+
+
+            if (track.children.length < 2) {
+                console.warn(
+                    "RAVE Carousel: not enough cards",
+                    carousel
+                );
+
+                return;
+            }
+
+
+            /* =============================================
+               STATE
+            ============================================= */
+
+            let position = 0;
+
+            let lastTime =
+                performance.now();
+
+            let paused = false;
+
+            let dragging = false;
+
+            let startX = 0;
+
+            let startPosition = 0;
+
+
+            /*
+             * Pixels per second.
+             *
+             * 25 = slow
+             * 35 = normal
+             * 50 = fast
+             */
+
+            const speed = 35;
+
+
+            /* =============================================
+               GAP
+            ============================================= */
+
+            function getGap() {
+
+                const style =
+                    window.getComputedStyle(track);
+
+                return (
+                    parseFloat(style.gap) ||
+                    parseFloat(style.columnGap) ||
+                    0
+                );
+
+            }
+
+
+            /* =============================================
+               CARD WIDTH
+            ============================================= */
+
+            function getCardWidth() {
+
+                const card =
+                    track.children[0];
+
+                if (!card) {
+                    return 0;
+                }
+
+                return card.getBoundingClientRect().width;
+
+            }
+
+
+            /* =============================================
+               UPDATE
+            ============================================= */
+
+            function update() {
+
+                track.style.transform =
+                    "translate3d(" +
+                    position +
+                    "px, 0, 0)";
+
+            }
+
+
+            /* =============================================
+               ANIMATION
+            ============================================= */
+
+            function animate(time) {
+
+                const delta =
+                    (time - lastTime) / 1000;
+
+                lastTime = time;
+
+
+                if (
+                    !paused &&
+                    !dragging
+                ) {
+
+                    position -=
+                        speed * delta;
+
+
+                    const cardWidth =
+                        getCardWidth();
+
+                    const gap =
+                        getGap();
+
+                    const distance =
+                        cardWidth + gap;
+
+
+                    if (
+                        distance > 0 &&
+                        Math.abs(position) >= distance
+                    ) {
+
+                        /*
+                         * Move the first card
+                         * to the end.
+                         */
+
+                        track.appendChild(
+                            track.children[0]
+                        );
+
+
+                        /*
+                         * Compensate the transform
+                         * so there is no visible jump.
+                         */
+
+                        position += distance;
+
+                    }
+
+
+                    update();
+
+                }
+
+
+                requestAnimationFrame(
+                    animate
+                );
+
+            }
+
+
+            requestAnimationFrame(
+                animate
+            );
+
+
+            /* =============================================
+               HOVER
+            ============================================= */
+
+            carousel.addEventListener(
+                "mouseenter",
+                function () {
+
+                    paused = true;
+
+                }
+            );
+
+
+            carousel.addEventListener(
+                "mouseleave",
+                function () {
+
+                    if (!dragging) {
+
+                        paused = false;
+
+                    }
+
+                }
+            );
+
+
+            /* =============================================
+               MOUSE DRAG
+            ============================================= */
+
+            carousel.addEventListener(
+                "mousedown",
+                function (event) {
+
+                    dragging = true;
+
+                    paused = true;
+
+                    startX =
+                        event.clientX;
+
+                    startPosition =
+                        position;
+
+                    carousel.classList.add(
+                        "dragging"
+                    );
+
+                }
+            );
+
+
+            window.addEventListener(
+                "mousemove",
+                function (event) {
+
+                    if (!dragging) {
+                        return;
+                    }
+
+
+                    position =
+                        startPosition +
+                        (
+                            event.clientX -
+                            startX
+                        );
+
+
+                    update();
+
+                }
+            );
+
+
+            window.addEventListener(
+                "mouseup",
+                function () {
+
+                    if (!dragging) {
+                        return;
+                    }
+
+
+                    dragging = false;
+
+                    carousel.classList.remove(
+                        "dragging"
+                    );
+
+
+                    setTimeout(
+                        function () {
+
+                            paused = false;
+
+                        },
+                        1000
+                    );
+
+                }
+            );
+
+
+            /* =============================================
+               TOUCH
+            ============================================= */
+
+            carousel.addEventListener(
+                "touchstart",
+                function (event) {
+
+                    dragging = true;
+
+                    paused = true;
+
+                    startX =
+                        event.touches[0].clientX;
+
+                    startPosition =
+                        position;
+
+                },
+                {
+                    passive: true
+                }
+            );
+
+
+            carousel.addEventListener(
+                "touchmove",
+                function (event) {
+
+                    if (!dragging) {
+                        return;
+                    }
+
+
+                    position =
+                        startPosition +
+                        (
+                            event.touches[0].clientX -
+                            startX
+                        );
+
+
+                    update();
+
+                },
+                {
+                    passive: true
+                }
+            );
+
+
+            carousel.addEventListener(
+                "touchend",
+                function () {
+
+                    dragging = false;
+
+
+                    setTimeout(
+                        function () {
+
+                            paused = false;
+
+                        },
+                        1000
+                    );
+
+                }
+            );
+
+
+            /* =============================================
+               ARROWS
+            ============================================= */
+
+            const carouselName =
+                carousel.id.replace(
+                    "-carousel",
+                    ""
+                );
+
+
+            const buttons =
+                document.querySelectorAll(
+                    '.carousel-btn[data-carousel="' +
+                    carouselName +
+                    '"]'
+                );
+
+
+            buttons.forEach(
+                function (button) {
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+                            const direction =
+                                Number(
+                                    button.dataset.direction
+                                );
+
+
+                            const cardWidth =
+                                getCardWidth();
+
+                            const gap =
+                                getGap();
+
+                            const distance =
+                                cardWidth + gap;
+
+
+                            if (!distance) {
+                                return;
+                            }
+
+
+                            paused = true;
+
+
+                            /*
+                             * NEXT
+                             */
+
+                            if (direction > 0) {
+
+                                position -=
+                                    distance;
+
+                                update();
+
+
+                                setTimeout(
+                                    function () {
+
+                                        track.appendChild(
+                                            track.children[0]
+                                        );
+
+                                        position +=
+                                            distance;
+
+                                        update();
+
+                                    },
+                                    350
+                                );
+
+                            }
+
+
+                            /*
+                             * PREVIOUS
+                             */
+
+                            else {
+
+                                const lastCard =
+                                    track.lastElementChild;
+
+
+                                if (!lastCard) {
+                                    return;
+                                }
+
+
+                                track.insertBefore(
+                                    lastCard,
+                                    track.firstElementChild
+                                );
+
+
+                                position -=
+                                    distance;
+
+                                update();
+
+
+                                requestAnimationFrame(
+                                    function () {
+
+                                        position +=
+                                            distance;
+
+                                        update();
+
+                                    }
+                                );
+
+                            }
+
+
+                            setTimeout(
+                                function () {
+
+                                    paused = false;
+
+                                },
+                                1000
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+        });
+
+    }
+
+
+    /*
+     * Run after the complete page has loaded.
+     *
+     * This is important on hosted sites because
+     * YouTube iframes/images can affect layout timing.
+     */
+
+    if (
+        document.readyState ===
+        "loading"
+    ) {
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            initRaveCarousels
+        );
+
+    }
+
+    else {
+
+        initRaveCarousels();
+
+    }
+
+
+})();
